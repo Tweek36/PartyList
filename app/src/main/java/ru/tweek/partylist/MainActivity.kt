@@ -1,7 +1,6 @@
 package ru.tweek.partylist
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -11,13 +10,6 @@ import android.view.Menu
 import android.view.MenuItem
 import ru.tweek.partylist.databinding.ActivityMainBinding
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ReportFragment.Companion.reportFragment
-import androidx.navigation.NavDestination
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,15 +1,14 @@
 package ru.tweek.partylist
 
 import android.content.Context
-import android.widget.Toast
 import com.google.gson.Gson
 import java.io.File
-import java.util.Date
+import java.util.Calendar
 
 class Holiday(
     val name: String,
     var description: String,
-    var date: Date
+    var date: Calendar
 ) {
     companion object {
         private val gson = Gson()
@@ -54,11 +53,9 @@ class Holiday(
 
         val existingHoliday = holidaysList.find { it.name == name }
         if (existingHoliday != null) {
-            // Update the existing holiday
             existingHoliday.description = description
             existingHoliday.date = date
         } else {
-            // Add a new holiday
             holidaysList.add(this)
         }
 

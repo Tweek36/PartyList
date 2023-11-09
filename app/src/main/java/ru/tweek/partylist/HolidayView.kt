@@ -1,24 +1,17 @@
 package ru.tweek.partylist
 
-import android.R
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.findNavController
 import ru.tweek.partylist.databinding.HolidayViewBinding
+import java.util.Calendar
 
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class HolidayView : Fragment() {
 
     private var _binding: HolidayViewBinding? = null
@@ -30,7 +23,7 @@ class HolidayView : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = HolidayViewBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -41,7 +34,7 @@ class HolidayView : Fragment() {
         val navController = findNavController()
         val holidayViewDestination = navController.graph.findNode(ru.tweek.partylist.R.id.holidayView) as NavDestination
         val holiday = Holiday.get(requireContext(), holidayViewDestination.label.toString())!!
-        binding.date.text = "${holiday.date.year+1900}/${holiday.date.month}/${holiday.date.day}"
+        binding.date.text = "${holiday.date.get(Calendar.YEAR)}/${holiday.date.get(Calendar.MONTH) + 1}/${holiday.date.get(Calendar.DAY_OF_MONTH)}"
         binding.description.text = holiday.description
         val bundle = Bundle()
         binding.edit.setOnClickListener {
