@@ -38,15 +38,19 @@ class HolidayView : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val navController = findNavController()
-        val holidayViewDestination = navController.graph.findNode(ru.tweek.partylist.R.id.HolidayView) as NavDestination
+        val holidayViewDestination = navController.graph.findNode(ru.tweek.partylist.R.id.holidayView) as NavDestination
         val holiday = Holiday.get(requireContext(), holidayViewDestination.label.toString())!!
         binding.date.text = "${holiday.date.year+1900}/${holiday.date.month}/${holiday.date.day}"
         binding.description.text = holiday.description
+        val bundle = Bundle()
+        binding.edit.setOnClickListener {
+            bundle.putString("name", holiday.name)
+            navController.navigate(ru.tweek.partylist.R.id.action_holidayView_to_secondFragment, bundle)
+        }
         binding.delete.setOnClickListener {
             holiday.delete(requireContext())
-            navController.navigate(ru.tweek.partylist.R.id.action_HolidayView_to_FirstFragment)
+            navController.navigate(ru.tweek.partylist.R.id.action_holidayView_to_firstFragment)
         }
     }
 

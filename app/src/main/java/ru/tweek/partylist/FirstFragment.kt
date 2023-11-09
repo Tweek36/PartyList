@@ -42,9 +42,9 @@ class FirstFragment : Fragment() {
         list.adapter = adapter
         list.setOnItemClickListener { _, _, position, _ ->
             val text = list.getItemAtPosition(position).toString()
-            val holidayViewDestination = navController.graph.findNode(ru.tweek.partylist.R.id.HolidayView) as NavDestination
+            val holidayViewDestination = navController.graph.findNode(ru.tweek.partylist.R.id.holidayView) as NavDestination
             holidayViewDestination.label = text
-            navController.navigate(ru.tweek.partylist.R.id.action_FirstFragment_to_HolidayView)
+            navController.navigate(ru.tweek.partylist.R.id.action_firstFragment_to_holidayView)
         }
     }
 

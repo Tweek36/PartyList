@@ -37,21 +37,28 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navController = findNavController()
-        val name = binding.holidayNameText.text
-        val year = binding.datePicker.year
-        val month = binding.datePicker.month
-        val day = binding.datePicker.dayOfMonth
-        val calendar = Calendar.getInstance()
-        calendar.set(year, month, day)
-        val date = calendar.time
-        val description = binding.holidayDescriptionText.text
-
+        if (arguments?.getString("name") != null) {
+            val edit = Holiday.get(requireContext(), requireArguments().getString("name")!!)
+            if (edit != null) {
+                binding.holidayNameText.setText(edit.name)
+                binding.datePicker.init(edit.date.year+1900, edit.date.month, edit.date.day, null)
+                binding.holidayDescriptionText.setText(edit.description)
+            }
+        }
         binding.button.setOnClickListener {
+            val name = binding.holidayNameText.text
+            val year = binding.datePicker.year
+            val month = binding.datePicker.month
+            val day = binding.datePicker.dayOfMonth
+            val calendar = Calendar.getInstance()
+            calendar.set(year, month, day)
+            val date = calendar.time
+            val description = binding.holidayDescriptionText.text
             val holiday = Holiday(name.toString(), description.toString(), date)
             Toast.makeText(requireContext(), holiday.name, Toast.LENGTH_SHORT).show()
             holiday.save(requireContext())
             Toast.makeText(requireContext(), Holiday.get(requireContext(), name.toString())?.name, Toast.LENGTH_SHORT).show()
-            navController.navigate(R.id.action_SecondFragment_to_FirstFragment)
+            navController.navigate(R.id.action_secondFragment_to_firstFragment)
         }
     }
 

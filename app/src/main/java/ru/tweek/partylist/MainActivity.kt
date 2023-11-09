@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.fab.setOnClickListener {
-            navController.navigate(R.id.action_FirstFragment_to_SecondFragment)
+            navController.navigate(R.id.action_firstFragment_to_secondFragment)
         }
     }
 
