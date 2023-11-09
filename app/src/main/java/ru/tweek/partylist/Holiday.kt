@@ -17,8 +17,11 @@ class Holiday(
         fun getHolidaysFile(context: Context): File {
             val file = File(context.filesDir, "holidays.json")
             if (!file.exists()) {
-                // If the file doesn't exist, create it
                 file.createNewFile()
+                file.writeText("[]")
+            }
+            if (file.readText() == "") {
+                file.writeText("[]")
             }
             return file
         }
