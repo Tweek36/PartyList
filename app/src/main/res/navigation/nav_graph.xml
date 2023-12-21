@@ -12,22 +12,6 @@
         <action
             android:id="@+id/action_firstFragment_to_holidayView"
             app:destination="@id/holidayView" />
-        <action
-            android:id="@+id/action_firstFragment_to_secondFragment"
-            app:destination="@id/secondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/secondFragment"
-        android:name="ru.tweek.partylist.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second" >
-        <action
-            android:id="@+id/action_secondFragment_to_firstFragment"
-            app:destination="@id/firstFragment" />
-        <argument
-            android:name="name"
-            app:argType="string"
-            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/holidayView"
@@ -36,8 +20,5 @@
         <action
             android:id="@+id/action_holidayView_to_firstFragment"
             app:destination="@id/firstFragment" />
-        <action
-            android:id="@+id/action_holidayView_to_secondFragment"
-            app:destination="@id/secondFragment" />
     </fragment>
 </navigation>

@@ -1,6 +1,7 @@
 package ru.tweek.partylist
 
 import android.os.Bundle
+import android.util.Xml
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -9,7 +10,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import ru.tweek.partylist.databinding.ActivityMainBinding
-import android.view.View
+import androidx.lifecycle.ViewModelProvider
+import org.xmlpull.v1.XmlPullParser
+import java.io.InputStream
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +21,35 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val viewModel = ViewModelProvider(this)[HolidaysViewModel::class.java]
+
+        val inputStream: InputStream = resources.openRawResource(R.raw.holidays)
+        val parser = Xml.newPullParser()
+        parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false)
+        parser.setInput(inputStream, null)
+
+        val holidays = mutableListOf<Holiday>()
+        var currentHoliday: Holiday? = null
+
+        while (parser.next() != XmlPullParser.END_DOCUMENT) {
+            when (parser.eventType) {
+                XmlPullParser.START_TAG -> {
+                    when (parser.name) {
+                        "holiday" -> currentHoliday = Holiday("", "", "")
+                        "name" -> currentHoliday?.name = parser.nextText()
+                        "date" -> currentHoliday?.date = parser.nextText()
+                        "description" -> currentHoliday?.description = parser.nextText()
+                    }
+                }
+                XmlPullParser.END_TAG -> {
+                    if (parser.name == "holiday") {
+                        currentHoliday?.let { holidays.add(it) }
+                    }
+                }
+            }
+        }
+
+        viewModel.holidaysList = holidays
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -27,20 +59,6 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
-
-        binding.fab.visibility = View.GONE
-
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.label == getString(R.string.first_fragment_label)) {
-                binding.fab.visibility = View.VISIBLE
-            } else {
-                binding.fab.visibility = View.GONE
-            }
-        }
-
-        binding.fab.setOnClickListener {
-            navController.navigate(R.id.action_firstFragment_to_secondFragment)
-        }
     }
 
 

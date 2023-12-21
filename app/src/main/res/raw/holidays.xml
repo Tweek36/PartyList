@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<holidays>
+    <holiday>
+        <name>Новый Год</name>
+        <date>2023-01-01</date>
+        <description>Празднование начала нового года.</description>
+    </holiday>
+    <holiday>
+        <name>Международный женский день</name>
+        <date>2023-03-08</date>
+        <description>Праздник, посвященный женской красоте и достижениям.</description>
+    </holiday>
+    <holiday>
+        <name>День Победы</name>
+        <date>2023-05-09</date>
+        <description>Празднование победы в Великой Отечественной войне.</description>
+    </holiday>
+    <holiday>
+        <name>День России</name>
+        <date>2023-06-12</date>
+        <description>Государственный праздник, посвященный Российской Федерации.</description>
+    </holiday>
+    <holiday>
+        <name>День народного единства</name>
+        <date>2023-11-04</date>
+        <description>Праздник, символизирующий единство народа России.</description>
+    </holiday>
+    <holiday>
+        <name>День Защитника Отечества</name>
+        <date>2023-02-23</date>
+        <description>Праздник, посвященный защитникам Родины.</description>
+    </holiday>
+    <holiday>
+        <name>Масленица</name>
+        <date>2023-02-28</date>
+        <description>Предшествующая Великому посту неделя с традиционными гуляниями и праздниками.</description>
+    </holiday>
+    <holiday>
+        <name>День Космонавтики</name>
+        <date>2023-04-12</date>
+        <description>Праздник, посвященный первому полету человека в космос.</description>
+    </holiday>
+    <holiday>
+        <name>День Российской науки</name>
+        <date>2023-02-08</date>
+        <description>Праздник, отмечающий достижения в области науки и технологий в России.</description>
+    </holiday>
+    <holiday>
+        <name>День государственного флага</name>
+        <date>2023-08-22</date>
+        <description>Праздник, посвященный государственному флагу России.</description>
+    </holiday>
+</holidays>
