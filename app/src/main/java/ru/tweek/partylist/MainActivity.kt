@@ -9,6 +9,9 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat
 import ru.tweek.partylist.databinding.ActivityMainBinding
 import androidx.lifecycle.ViewModelProvider
 import org.xmlpull.v1.XmlPullParser
@@ -69,7 +72,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_settings -> {
+                val navController = findNavController(R.id.nav_host_fragment_content_main)
+                navController.navigate(R.id.settingsFragment) // Replace with your actual destination ID
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

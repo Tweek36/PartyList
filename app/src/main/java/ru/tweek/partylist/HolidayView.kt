@@ -36,7 +36,9 @@ class HolidayView : Fragment() {
         val holidaysList = viewModel.holidaysList
         val holiday = holidaysList.find { it.name == holidayViewDestination.label.toString() }
         if (holiday != null) {
-            binding.date.text = holiday.date
+            if (viewModel.showDate) {
+                binding.date.text = holiday.date
+            }
             binding.description.text = holiday.description
         }
     }

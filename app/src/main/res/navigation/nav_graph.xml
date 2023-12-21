@@ -21,4 +21,14 @@
             android:id="@+id/action_holidayView_to_firstFragment"
             app:destination="@id/firstFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="ru.tweek.partylist.Settings"
+        android:label="settings"
+        tools:layout="@layout/settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_firstFragment"
+            app:destination="@id/firstFragment" />
+    </fragment>
+
 </navigation>
