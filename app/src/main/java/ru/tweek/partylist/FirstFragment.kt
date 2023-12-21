@@ -17,7 +17,7 @@ import ru.tweek.partylist.databinding.FragmentFirstBinding
 class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
-
+    private lateinit var viewModel: HolidaysViewModel
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -31,7 +31,7 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navController = findNavController()
-        val viewModel = ViewModelProvider(requireActivity())[HolidaysViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[HolidaysViewModel::class.java]
         val holidaysList = viewModel.holidaysList
         val results: MutableList<String> = holidaysList.map { it.name }.toMutableList()
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, results)
@@ -39,6 +39,7 @@ class FirstFragment : Fragment() {
         list.adapter = adapter
         list.setOnItemClickListener { _, _, position, _ ->
             val text = list.getItemAtPosition(position).toString()
+            viewModel.currentHoliday = text
             val holidayViewDestination = navController.graph.findNode(R.id.holidayView) as NavDestination
             holidayViewDestination.label = text
             navController.navigate(R.id.action_firstFragment_to_holidayView)

@@ -16,7 +16,7 @@ import java.util.Calendar
 class HolidayView : Fragment() {
 
     private var _binding: HolidayViewBinding? = null
-
+    private lateinit var viewModel: HolidaysViewModel
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -30,11 +30,9 @@ class HolidayView : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val navController = findNavController()
-        val holidayViewDestination = navController.graph.findNode(ru.tweek.partylist.R.id.holidayView) as NavDestination
-        val viewModel = ViewModelProvider(requireActivity())[HolidaysViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[HolidaysViewModel::class.java]
         val holidaysList = viewModel.holidaysList
-        val holiday = holidaysList.find { it.name == holidayViewDestination.label.toString() }
+        val holiday = holidaysList.find { it.name == viewModel.currentHoliday }
         if (holiday != null) {
             if (viewModel.showDate) {
                 binding.date.text = holiday.date
